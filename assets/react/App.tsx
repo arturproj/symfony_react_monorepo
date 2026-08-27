@@ -5,9 +5,13 @@ import viteLogo from '../img/vite.svg'
 import iconsUrl from "../img/icons.svg";
 import './App.css';
 
-function App() {
-  const [count, setCount] = useState(0)
+interface PropsType {
+  name : string
+}
 
+function App(props: PropsType) {
+  const [count, setCount] = useState(0)
+  console.log({props})
   return (
     <>
       <section id="center">
@@ -19,8 +23,9 @@ function App() {
         <div>
           <h1>Get started</h1>
           <p id="code">
-            Edit <code>assets/react/components/AppComponent/App.tsx</code> and save to test <code>HMR</code>
+            Edit <code>assets/react/App.tsx</code> and save to test <code>HMR</code> 
           </p>
+          <p>Controller Symfony <code>{props.name}</code></p>
         </div>
         <button
           type="button"

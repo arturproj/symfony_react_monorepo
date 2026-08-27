@@ -9,6 +9,6 @@
 </style>
 
 <div class="example-wrapper">
-    <div {{ stimulus_controller('app') }}></div>
+    <div {{ stimulus_controller('app', { props : { name: controller_name} }) }}></div>
 </div>
 {% endblock %}
