@@ -2,7 +2,7 @@
 import { Controller } from '@hotwired/stimulus';
 import React from 'react';
 import { createRoot } from 'react-dom/client';
-import App from '../react/components/AppComponent/App';
+import App from '../react/App';
 
 export default class extends Controller {
     static values = { props: Object };

@@ -28,7 +28,6 @@ Encore
      * and one CSS file (e.g. app.css) if your JavaScript imports CSS.
      */
     .addEntry('app', './assets/app.js')
-    .addEntry('react-app', './assets/react/index.tsx') // entry dedicato a React
 
     // When enabled, Webpack "splits" your files into smaller pieces for greater optimization.
     .splitEntryChunks()
@@ -60,10 +59,23 @@ Encore
     // .configureCssMinimizerPlugin((options, MinimizerPlugin) => {
     //     options.minify = MinimizerPlugin.lightningCssMinify;
     // })
-
+    .configureBabelPresetEnv((config) => {
+        // non tocchiamo preset-env qui, serve solo come hook se necessario
+    })
     // configure Babel
     .configureBabel((config) => {
         config.plugins.push(['polyfill-corejs3', { method: 'usage-global', version: '3.49' }]);
+
+        // forza esplicitamente dev/prod per il runtime JSX
+        const reactPresetIndex = config.presets.findIndex(
+            (p) => Array.isArray(p) && typeof p[0] === 'string' && p[0].includes('preset-react')
+        );
+        if (reactPresetIndex !== -1) {
+            config.presets[reactPresetIndex][1] = {
+                ...config.presets[reactPresetIndex][1],
+                development: !Encore.isProduction(),
+            };
+        }
     })
 
     // enables Sass/SCSS support

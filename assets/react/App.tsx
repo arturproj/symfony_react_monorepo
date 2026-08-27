@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import heroImg from '../../../img/hero.png'
-import reactLogo from '../../../img/react.svg'
-import viteLogo from '../../../img/vite.svg'
-import iconsUrl from "../../../img/icons.svg";
+import heroImg from '../img/hero.png'
+import reactLogo from '../img/react.svg'
+import viteLogo from '../img/vite.svg'
+import iconsUrl from "../img/icons.svg";
 import './App.css';
 
 function App() {
@@ -18,8 +18,8 @@ function App() {
         </div>
         <div>
           <h1>Get started</h1>
-          <p>
-            Edit <code>src/App.tsx</code> and save to test <code>HMR</code>
+          <p id="code">
+            Edit <code>assets/react/components/AppComponent/App.tsx</code> and save to test <code>HMR</code>
           </p>
         </div>
         <button
