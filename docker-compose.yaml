@@ -1,0 +1,43 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: docker/app/Dockerfile
+    container_name: symfony_app
+    restart: unless-stopped
+    environment:
+      APP_ENV: ${APP_ENV}
+      APP_DEBUG: ${APP_DEBUG}
+      APP_SECRET: ${APP_SECRET}
+      # DATABASE_URL: ${DATABASE_URL}
+    volumes:
+      # Condivide public/ con Nginx (asset statici, build/ generato da Webpack Encore)
+      - public_data:/var/www/html/public
+      # Log e cache persistenti tra i riavvii del container
+      - app_var:/var/www/html/var
+    networks:
+      - app_network
+
+  nginx:
+    build:
+      context: .
+      dockerfile: docker/nginx/Dockerfile
+    container_name: symfony_nginx
+    restart: unless-stopped
+    ports:
+      - "80:80"
+    volumes:
+      - public_data:/var/www/html/public:ro
+    depends_on:
+      - app
+    networks:
+      - app_network
+
+
+volumes:
+  public_data:
+  app_var:
+
+networks:
+  app_network:
+    driver: bridge

@@ -1,0 +1,13 @@
+.git
+.gitignore
+node_modules
+var/cache
+var/log
+public/build
+vendor
+Dockerfile
+.dockerignore
+README.md
+tests
+.idea
+.vscode
